@@ -12,7 +12,8 @@ export default function Form(props) {
         <form autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
-            name={name}
+            value={name}
+            name="name"
             type="text"
             placeholder="Enter Student Name"
             onChange={event => setName(event.target.value)}
@@ -26,10 +27,7 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button
-            danger
-            onClick={() => props.onCancel(setName(""), setInterviewer(null))}
-          >
+          <Button danger onClick={() => props.onCancel()}>
             Cancel
           </Button>
           <Button confirm onClick={() => props.onSave(name, interviewer)}>
