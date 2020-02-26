@@ -51,7 +51,9 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    const tempDays = [...state.days];
+
+    // const tempDays = [...state.days];
+    const tempDays = JSON.parse(JSON.stringify(state.days));
     for (let day in tempDays) {
       if (tempDays[day].appointments.includes(id)) {
         tempDays[day].spots--;
@@ -76,7 +78,8 @@ export default function useApplicationData(props) {
       interview: null
     };
 
-    const tempDays = [...state.days];
+    // const tempDays = [...state.days];
+    const tempDays = JSON.parse(JSON.stringify(state.days));
     for (let day in tempDays) {
       if (tempDays[day].appointments.includes(id)) {
         tempDays[day].spots++;
@@ -89,7 +92,7 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() =>
         dispatch({
           type: SET_INTERVIEW,

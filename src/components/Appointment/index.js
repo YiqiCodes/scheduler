@@ -44,7 +44,7 @@ export default function Appointment(props) {
   }
 
   return (
-    <header className="appointment">
+    <article className="appointment" data-testid="appointment">
       <h4 className="text--semi-bold">{props.time}</h4>
       <section>
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
@@ -83,6 +83,6 @@ export default function Appointment(props) {
         )}
         {mode === ERROR && <Error message={"Error"} onClose={() => back()} />}
       </section>
-    </header>
+    </article>
   );
 }
