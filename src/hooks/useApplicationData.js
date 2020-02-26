@@ -8,6 +8,7 @@ import reducer, {
 } from "reducers/application";
 
 export default function useApplicationData(props) {
+  // original rendered state
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -16,6 +17,7 @@ export default function useApplicationData(props) {
   });
   const setDay = day => dispatch({ type: SET_DAY, day });
 
+  // dispatch and update appointment/days/type when user books interview
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -45,7 +47,7 @@ export default function useApplicationData(props) {
         })
       );
   }
-
+  // dispatch and update appointment/days/type when user deletes interview
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -75,7 +77,7 @@ export default function useApplicationData(props) {
         })
       );
   }
-
+  // axios calls to connect database
   useEffect(() => {
     if (state.days.length === 0) {
       Promise.all([
