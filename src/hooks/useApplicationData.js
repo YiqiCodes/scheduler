@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
-export default function useApplicationData(props) {
-  const SET_DAY = "SET_DAY";
-  const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
-  const SET_INTERVIEW = "SET_INTERVIEW";
+import reducer, {
+  SET_DAY,
+  SET_APPLICATION_DATA,
+  SET_INTERVIEW
+} from "reducers/application";
 
+export default function useApplicationData(props) {
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -13,34 +15,6 @@ export default function useApplicationData(props) {
     interviewers: {}
   });
   const setDay = day => dispatch({ type: SET_DAY, day });
-
-  function reducer(state, action) {
-    switch (action.type) {
-      case SET_DAY:
-        return {
-          ...state,
-          day: action.day
-        };
-      case SET_APPLICATION_DATA:
-        return {
-          ...state,
-          days: action.days,
-          appointments: action.appointments,
-          interviewers: action.interviewers
-        };
-      case SET_INTERVIEW: {
-        return {
-          ...state,
-          appointments: action.appointments,
-          days: action.tempDays
-        };
-      }
-      default:
-        throw new Error(
-          `Tried to reduce with unsupported action type: ${action.type}`
-        );
-    }
-  }
 
   function bookInterview(id, interview) {
     const appointment = {
