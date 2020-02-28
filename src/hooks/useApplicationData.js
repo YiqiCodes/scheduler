@@ -37,15 +37,13 @@ export default function useApplicationData(props) {
       }
     }
 
-    return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, appointment)
-      .then(() =>
-        dispatch({
-          type: SET_INTERVIEW,
-          appointments,
-          tempDays
-        })
-      );
+    return axios.put(`api/appointments/${id}`, appointment).then(() =>
+      dispatch({
+        type: SET_INTERVIEW,
+        appointments,
+        tempDays
+      })
+    );
   }
   // dispatch and update appointment/days/type when user deletes interview
   function cancelInterview(id) {
@@ -67,15 +65,13 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
-      .then(() =>
-        dispatch({
-          type: SET_INTERVIEW,
-          appointments,
-          tempDays
-        })
-      );
+    return axios.delete(`api/appointments/${id}`).then(() =>
+      dispatch({
+        type: SET_INTERVIEW,
+        appointments,
+        tempDays
+      })
+    );
   }
   // axios calls to connect database
   useEffect(() => {
